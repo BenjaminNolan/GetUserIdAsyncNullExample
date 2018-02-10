@@ -1,12 +1,15 @@
-# ASP.NET Core 2.0 - GetUserIdAsync() returning null with Guid Ids
+# ASP.NET Core 2.0 - `GetUserIdAsync()` returning `null` with `Guid` ids
 
-This repo demonstrates an issue I am experiencing where GetUserIdAsync() returns null
-when using Guid Ids in ASP.NET Core 2.0 Identity.
+This repo demonstrates an issue I am experiencing where `GetUserIdAsync()` returns null
+when using `Guid` ids in ASP.NET Core 2.0 Identity.
 
-You can reproduce this error by running the code in this repo as follows:
+To run this project and reproduce the error, you will need to first create a database
+in SQL Server and modify the details in `appsettings.json` accordingly, then run the
+following commands:
 
     dotnet restore
     dotnet build
+    dotnet ef database update
     dotnet run
 
 Now go to http://localhost:5001/register and fill out the form, after which you should see
