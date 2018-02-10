@@ -5,7 +5,7 @@ when using `Guid` ids in ASP.NET Core 2.0 Identity.
 
 To run this project and reproduce the error, you will need to first create a database
 in SQL Server and modify the details in `appsettings.json` accordingly, then run the
-following commands:
+following commands in `GetUserIdAsyncNullExample/`:
 
     dotnet restore
     dotnet build
