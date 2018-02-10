@@ -1,0 +1,40 @@
+﻿@using GetUserIdAsyncNullExample.Models
+@using GetUserIdAsyncNullExample.ViewModels
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using System.Collections.Generic
+@using System.Linq
+
+@model RegisterViewModel
+
+@inject SignInManager<User> SignInManager
+
+<form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+    <div class="centered-form-container">
+        <h4>Register</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="DisplayName" style="width:185px; display:inline-block;"></label>
+            <input asp-for="DisplayName" class="form-control" />
+            <span asp-validation-for="DisplayName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" style="width:185px; display:inline-block;"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" style="width:185px; display:inline-block;"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword" style="width:185px; display:inline-block;"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-default" style="float:right;">Register</button>
+    </div>
+</form>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Example";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>GetUserIdAsync() returning null with Guid Ids</h2>
+        <p>
+            I'm currently porting a site to ASP.NET Core 2 and am
+            getting the following Exception thrown when I call
+            <code>userManager.GenerateEmailConfirmationTokenAsync(user)</code>
+            with a user class that extends <code>IdentityUser&lt;Guid&gt;</code>
+        </p>
+
+        <pre>
+System.ArgumentNullException: Value cannot be null.
+Parameter name: value
+   at System.IO.BinaryWriter.Write(String value)
+   at Microsoft.AspNetCore.Identity.DataProtectorTokenProvider`1.&lt;GenerateAsync&gt;d__11.MoveNext()</pre>
+        <p>
+            <a href="https://github.com/aspnet/Identity/blob/85f8a49aef68bf9763cd9854ce1dd4a26a7c5d3c/src/Identity/DataProtectionTokenProvider.cs#L66"
+               target="external-links">GenerateAsync()</a> makes a call to
+            <a href="https://github.com/aspnet/Identity/blob/85f8a49aef68bf9763cd9854ce1dd4a26a7c5d3c/src/Stores/UserStoreBase.cs#L117"
+               target="external-links">UserManager.GetUserIdAsync()</a>, which
+            is returning the <code>null</code> value in <code>Result</code>,
+            which <code>Write()</code> is complaining about, even though the
+            <code>User</code> instance I'm passing through has
+            <code>07c0423e-f36b-1410-8007-800000000000</code> in
+            <code>Id</code>.
+        </p>
+        <p>
+            If I call <code>userManager.GetUserIdAsync(user)</code> directly on
+            the same <code>UserManager</code> instance on which I'm calling
+            <code>GenerateEmailConfirmationTokenAsync()</code> I get this same
+            <code>null</code> value in <code>Result</code>.
+        </p>
+        <p>
+            The StackOverflow question associated with this repo can be found at:
+            <a href="https://stackoverflow.com/questions/48722020/asp-net-core-2-getuseridasync-returning-null-result-with-guid-ids"
+               target="external-links">
+                https://stackoverflow.com/questions/48722020/asp-net-core-2-getuseridasync-returning-null-result-with-guid-ids
+            </a>
+        </p>
+        <p>
+            You can see the error in action by going to the
+            <a href="/register">Register</a> action on this project.
+        </p>
+    </div>
+</div>
